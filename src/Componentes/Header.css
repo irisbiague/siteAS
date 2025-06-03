@@ -1,0 +1,49 @@
+header {
+  background-color: rgba(98, 144, 112, 0.782); /* mesma cor e transparência do container */
+  padding: 20px 40px; /* dá um espaçamento interno confortável */
+  border-radius: 0px; /* para combinar com os cantos arredondados do container */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* para separar os elementos */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* sombra igual */
+  color: white;
+}
+
+/* TEMOS DE MUDAR A COR DO HEADER PQ FICA ESTRANHO */
+header a {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 45px; /* Ajuste o tamanho conforme necessário */
+  pointer-events: none; /* Se não for necessário, pode remover */
+}
+
+/* Caso queira animar o logo no header */
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: App-logo-spin infinite 20s linear; /* Se quiser a animação */
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.casa-icon {
+  width: 45px; 
+  height: auto;
+  margin-right: 10px;
+}
+
+.icon-link {
+  display: inline-block;
+}
+/* ENCONTRAR O TAMANHO DOS CONTAINERS E FAZER QUE A HEADER TENHA A MESMA LARGURA */
+

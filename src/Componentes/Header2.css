@@ -1,0 +1,57 @@
+.topo-site {
+  position: relative;
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Imagem de fundo */
+  background-image: url('../Imagens/fundo.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* Cor verde escura sobre a imagem com opacidade */
+  background-color: rgba(88, 133, 109, 0.782);
+  background-blend-mode: multiply;
+}
+
+/* menu horizontal no desktop */
+.menu-navegacao {
+  display: flex;
+  gap: 5rem; /* espaçamento entre os links */
+  position: relative;
+  z-index: 1; /* garante que os links aparecem por cima */
+}
+
+.menu-navegacao a {
+  color: #e1f7c5; /* verde-limão claro */
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.menu-navegacao a:hover {
+  transform: scale(1.05);
+  color: #ffffff;
+}
+
+/* Media query para telas pequenas (mobile) */
+@media (max-width: 600px) {
+  .topo-site {
+    padding: 1rem 0;
+  }
+
+  .menu-navegacao {
+    flex-direction: column; /* menu vertical no mobile */
+    gap: 1.2rem; /* menor espaçamento */
+    align-items: center;
+  }
+
+  .menu-navegacao a {
+    font-size: 1rem; /* fonte menor no mobile */
+    padding: 0.5rem 1rem;
+  }
+}
