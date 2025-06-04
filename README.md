@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# 🥗 Plataforma de Refeições Saudáveis
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi desenvolvido como parte de uma entrega académica, utilizando React para criar uma plataforma de gestão e encomenda de refeições com foco em saúde e nutrição.
 
-## Available Scripts
+## 👥 Equipa
 
-In the project directory, you can run:
+- Iris Biaguê (119251)
+- Guilherme Graça (115876)
+- Gonçalo Martins (107313)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Tecnologias Utilizadas
 
-### `npm test`
+- React
+- JavaScript (ES6+)
+- HTML/CSS
+- LocalStorage para persistência de dados
+- React Hooks (useState, useEffect)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🛠️ Instruções para correr a aplicação localmente
 
-### `npm run eject`
+1. Instalar dependências:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Iniciar a aplicação:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Aceder no browser a:
 
-## Learn More
+```
+http://localhost:3000
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 👤 Como testar a plataforma
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Conta de Cliente:
 
-### Code Splitting
+1. O utilizador, ao aceder à plataforma pela primeira vez, deverá entrar na secção “Criar Conta” e inserir os seus dados, juntamente com as preferências nutricionais.
+2. Com base nestas preferências, será apresentada uma página de recomendações personalizada.
+3. Se tiver optado por subscrever o plano semanal, verá que o seu carrinho de compras foi automaticamente preenchido com 7 refeições.
+4. Pode então selecionar uma refeição por dia, garantindo assim um plano variado para a semana.
+5. Na página de recomendações, ao clicar numa refeição, poderá aceder a mais detalhes sobre a mesma, visitar o perfil do restaurante responsável e efetuar o pedido.
+6. Ao fazer o pedido, será redirecionado para o carrinho, onde poderá finalizar o pagamento e utilizar os códigos de desconto “vinte” e “MYDESCONTO”.
+7. Após a entrega, poderá avaliar o estafeta e dar gorjeta, se assim o desejar.
+8. Todas as preferências definidas na criação da conta poderão ser alteradas na secção “Conta Cliente”, e a página de recomendações será automaticamente atualizada conforme essas alterações.
+9. Na secção “About Us”, o utilizador poderá saber mais sobre a plataforma e até enviar uma reclamação.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Conta Profissional:
 
-### Analyzing the Bundle Size
+1. Aceder à secção “Início” e clicar no botão “Profissional”.
+2. Escolher entre visitar a conta do estafeta ou do restaurante.
+3. Inserir um e-mail e palavra-passe à escolha para aceder (não é necessária validação real).
+4. A conta do estafeta apenas apresenta uma interface visual representativa.
+5. A conta do restaurante permite:
+   - Marcar pedidos como prontos;
+   - Alterar os dados das três refeições do restaurante “Bom Sabor” (preço, calorias, dietas compatíveis);
+   - Guardar alterações.
+6. Para ver as alterações, voltar à conta de cliente com preferências compatíveis — os pratos atualizados aparecerão na página de recomendações.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este projeto representa um esforço de aprendizagem sobre desenvolvimento web com React e simulação de funcionalidades reais de plataformas de entrega.
