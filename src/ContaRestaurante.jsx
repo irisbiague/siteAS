@@ -6,34 +6,38 @@ import restauranteFoto from './Imagens/restaurante.jpg';
 
 const ContaRestaurante = () => {
   const chartRef = useRef(null);
+  const pratosChartRef = useRef(null);
+
   const [pedidos, setPedidos] = useState([
-    { id: 1, cliente: 'Joana Oliveira', refeicao: 'Wrap de Frango', estado: 'Pendente' },
-    { id: 2, cliente: 'Carlos Tavares', refeicao: 'Tigela de Açaí', estado: 'A preparar' },
+    { id: 1, cliente: 'Joana Oliveira', refeicao: 'Frango Grelhado com Legumes', estado: 'Pendente' },
+    { id: 2, cliente: 'Carlos Tavares', refeicao: 'Sopa do Dia', estado: 'A preparar' },
+    { id: 3, cliente: 'Ana Mendes', refeicao: 'Salmão ao Molho de Limão', estado: 'Pendente' },
+    { id: 4, cliente: 'Bruno Costa', refeicao: 'Sopa do Dia', estado: 'Pronto' },
+    { id: 5, cliente: 'Mariana Silva', refeicao: 'Frango Grelhado com Legumes', estado: 'Pendente' }
   ]);
+
   const [pratos, setPratos] = useState([]);
 
   useEffect(() => {
     const dados = localStorage.getItem('pratosRestaurante');
-
     if (dados) {
       setPratos(JSON.parse(dados));
     } else {
-      reporPratosExemplo(); // <- chamada aqui também
+      reporPratosExemplo();
     }
 
-    const ctx = chartRef.current.getContext('2d');
-    if (chartRef.current._chartInstance) {
-      chartRef.current._chartInstance.destroy();
-    }
+    if (!chartRef.current || !pratosChartRef.current) return;
 
-    const chart = new Chart(ctx, {
+    // === Gráfico: Pedidos por Dia da Semana ===
+    const ctxSemana = chartRef.current.getContext('2d');
+    const graficoSemanal = new Chart(ctxSemana, {
       type: 'bar',
       data: {
         labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
         datasets: [{
-          label: 'Pedidos',
+          label: 'Pedidos por dia',
           data: [12, 9, 14, 11, 15, 8, 5],
-          backgroundColor: '#000000',
+          backgroundColor: '#000',
           borderRadius: 8
         }]
       },
@@ -51,27 +55,67 @@ const ContaRestaurante = () => {
           }
         },
         scales: {
-          x: {
-            ticks: { color: '#000' },
-            grid: { color: '#00000033' }
-          },
+          x: { ticks: { color: '#000' }, grid: { color: '#00000033' } },
           y: {
             beginAtZero: true,
             ticks: { color: '#000' },
             grid: { color: '#00000033' },
-            title: {
-              display: true,
-              text: 'Pedidos',
-              color: '#000'
-            }
+            title: { display: true, text: 'Pedidos', color: '#000' }
           }
         }
       }
     });
 
-    chartRef.current._chartInstance = chart;
-    return () => chart.destroy();
-  }, []);
+    // === Gráfico: Pedidos por Prato ===
+    const ctxPratos = pratosChartRef.current.getContext('2d');
+    const contagem = {};
+    pedidos.forEach(p => {
+      contagem[p.refeicao] = (contagem[p.refeicao] || 0) + 1;
+    });
+
+    const graficoPratos = new Chart(ctxPratos, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(contagem),
+        datasets: [{
+          label: 'Pedidos por Prato',
+          data: Object.values(contagem),
+          backgroundColor: ['rgba(24, 160, 65, 0.97)', 'rgb(2, 86, 27)', 'rgb(190, 255, 210)', '#4bc0c0'],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: '#000' } },
+          tooltip: {
+            backgroundColor: '#000',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            callbacks: {
+              label: context => `${context.parsed.y} pedidos`
+            }
+          }
+        },
+        scales: {
+          x: { ticks: { color: '#000' }, grid: { color: '#00000033' } },
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#000' },
+            grid: { color: '#00000033' },
+            title: { display: true, text: 'Nº de Pedidos', color: '#000' }
+          }
+        }
+      }
+    });
+
+    return () => {
+      graficoSemanal.destroy();
+      graficoPratos.destroy();
+    };
+  }, [pedidos]);
+
+  
 
   const reporPratosExemplo = () => {
     const pratosIniciais = [
@@ -180,14 +224,14 @@ const ContaRestaurante = () => {
                   <option value="Sobremesa">Sobremesa</option>
                 </select>
               </label>
-              <label>Alergias Possíveis (separadas por vírgulas):
-                <input type="text" value={prato.alergiasPossiveis || ''} onChange={e => atualizarPrato(prato.id, 'alergiasPossiveis', e.target.value.split(',').map(s => s.trim()))} />
+              <label>Alergias Possíveis:
+                <input type="text" value={prato.alergiasPossiveis?.join(', ') || ''} onChange={e => atualizarPrato(prato.id, 'alergiasPossiveis', e.target.value.split(',').map(s => s.trim()))} />
               </label>
-              <label>Dietas Compatíveis (separadas por vírgulas):
-                <input type="text" value={prato.subscricoesCompativeis || ''} onChange={e => atualizarPrato(prato.id, 'subscricoesCompativeis', e.target.value.split(',').map(s => s.trim()))} />
+              <label>Dietas Compatíveis:
+                <input type="text" value={prato.subscricoesCompativeis?.join(', ') || ''} onChange={e => atualizarPrato(prato.id, 'subscricoesCompativeis', e.target.value.split(',').map(s => s.trim()))} />
               </label>
-              <label>Imagem (nome do ficheiro .jpg): <input value={prato.imagem || ''} onChange={e => atualizarPrato(prato.id, 'imagem', e.target.value)} /></label>
-              <label>Link do Prato: <input value={prato.link || ''} onChange={e => atualizarPrato(prato.id, 'link', e.target.value)} /></label>
+              <label>Imagem: <input value={prato.imagem || ''} onChange={e => atualizarPrato(prato.id, 'imagem', e.target.value)} /></label>
+              <label>Link: <input value={prato.link || ''} onChange={e => atualizarPrato(prato.id, 'link', e.target.value)} /></label>
               <label>Visível nas Recomendações:
                 <input type="checkbox" checked={prato.visivel} onChange={e => atualizarPrato(prato.id, 'visivel', e.target.checked)} />
               </label>
@@ -195,7 +239,6 @@ const ContaRestaurante = () => {
           ))}
 
           <button className="btn" onClick={guardarAlteracoes}>Guardar alterações</button>
-          
 
           <div className="section-title">Avaliações de Clientes</div>
           <div className="avaliacao"><strong>Joana M.</strong><div className="stars">★★★★☆</div><p>Comida deliciosa e chegou bem embalada!</p></div>
@@ -204,6 +247,9 @@ const ContaRestaurante = () => {
 
           <div className="section-title">Pedidos da Semana</div>
           <canvas ref={chartRef} width="100%" height="60"></canvas>
+          <div className="section-title">Pedidos por Prato</div>
+          <canvas ref={pratosChartRef} width="100%" height="60"></canvas>
+       
         </div>
       </div>
     </>
