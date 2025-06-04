@@ -22,7 +22,7 @@ const TipoDieta = () => {
   };
 
   const dietas = [
-    { nome: 'Mediterrânica', descricao: 'Baseada em alimentos frescos como frutas, legumes, azeite, peixe e grãos integrais.' },
+    { nome: 'Mediterrânea', descricao: 'Baseada em alimentos frescos como frutas, legumes, azeite, peixe e grãos integrais.' },
     { nome: 'Detox', descricao: 'Foco em eliminar toxinas do corpo, baseada em sumos, chás e alimentos naturais.' },
     { nome: 'Vegetariana', descricao: 'Elimina carne, focando-se em vegetais, frutas, grãos, legumes e laticínios.' },
     { nome: 'Vegana', descricao: 'Exclui todos os produtos de origem animal, priorizando alimentos de origem vegetal.' },
